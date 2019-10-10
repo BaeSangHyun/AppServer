@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="employee"  type="kr.or.ddit.android.model.Employee"/>
+		<typeAlias alias="commute"  type="kr.or.ddit.android.model.Commute"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="kr/or/ddit/config/mybatis/mapper/user.xml"/>
+		<mapper resource="kr/or/ddit/config/mybatis/mapper/commute.xml"/>
+	</mappers>
+	
+</configuration>

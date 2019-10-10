@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commute">
+	<select id="commuteInfo" parameterType="commute" resultType="commute">
+		select *
+		  from commute
+		  where emp_id = #{emp_id}
+		  and dt = #{dt}
+	</select>
+
+	<insert id="commuteCheck" parameterType="commute">
+		insert into commute (emp_id, dt, gtw_tm, res)
+		values (
+			#{emp_id},
+			#{dt},
+			#{gtw_tm},
+			#{res}
+		)
+	</insert>
+
+	<update id="commuteUpdate" parameterType="commute">
+		update commute set ow_tm = #{ow_tm}, res = #{res}
+		where emp_id = #{emp_id}
+		and dt = #{dt}
+	</update>
+
+	<update id="commuteReason" parameterType="commute">
+		update commute set reas = #{reas}
+		where emp_id = #{emp_id}
+		and dt = #{dt}
+	</update>
+
+</mapper>
