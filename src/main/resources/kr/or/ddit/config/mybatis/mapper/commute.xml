@@ -32,4 +32,11 @@
 		and dt = #{dt}
 	</update>
 
+	<select id="getCommuteList" parameterType="commute" resultType="commute">
+		select *
+		from commute
+		where emp_id = #{emp_id}
+		and res != '정상근무'
+	</select>
+
 </mapper>

@@ -2,6 +2,8 @@ package kr.or.ddit.android.repository.commute;
 
 import kr.or.ddit.android.model.Commute;
 
+import java.util.List;
+
 public interface ICommuteDao {
 
     /**
@@ -31,4 +33,11 @@ public interface ICommuteDao {
      * @return
      */
     int commuteReason ( Commute commute );
+
+    /**
+     * 근태 리스트
+     * @param commute
+     * @return
+     */
+    List<Commute> getCommuteList ( Commute commute );
 }

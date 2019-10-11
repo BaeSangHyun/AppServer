@@ -15,10 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -75,7 +72,7 @@ public class HomeController {
             if (time.getTime() - nowTime.getTime() > 0) {
                 commute.setRes("비정상근무/조퇴");
             } else {
-                commute.setRes("정상근무");
+                commute.setRes(comData.getRes());
             }
 
             commuteService.commuteUpdate(commute);
@@ -100,5 +97,19 @@ public class HomeController {
         return "jsonView";
     }
 
+    @RequestMapping(path = "commuteList", method = RequestMethod.POST)
+    public String commuteList(HttpServletRequest request, Model model) {
+        String emp_id = request.getParameter("emp_id");
+
+        Commute commute = new Commute();
+        commute.setEmp_id(emp_id);
+
+        if ( emp_id != null ) {
+            List<Commute> commuteList = commuteService.getCommuteList(commute);
+            model.addAttribute("commuteList", commuteList);
+        }
+
+        return "jsonView";
+    }
 
 }

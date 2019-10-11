@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class CommuteDao implements ICommuteDao {
@@ -30,5 +31,10 @@ public class CommuteDao implements ICommuteDao {
     @Override
     public int commuteReason(Commute commute) {
         return sqlSession.update("commute.commuteReason", commute);
+    }
+
+    @Override
+    public List<Commute> getCommuteList(Commute commute) {
+        return sqlSession.selectList("commute.getCommuteList", commute);
     }
 }

@@ -5,6 +5,7 @@ import kr.or.ddit.android.repository.commute.ICommuteDao;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CommuteService implements ICommuteService {
@@ -30,5 +31,10 @@ public class CommuteService implements ICommuteService {
     @Override
     public int commuteReason(Commute commute) {
         return commuteDao.commuteReason(commute);
+    }
+
+    @Override
+    public List<Commute> getCommuteList(Commute commute) {
+        return commuteDao.getCommuteList(commute);
     }
 }

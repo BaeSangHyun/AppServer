@@ -1,12 +1,5 @@
 package kr.or.ddit.android.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Commute {
     private String emp_id;
     private String dt;
