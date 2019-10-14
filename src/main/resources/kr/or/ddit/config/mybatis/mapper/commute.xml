@@ -36,7 +36,7 @@
 		select *
 		from commute
 		where emp_id = #{emp_id}
-		and res != '정상근무'
+		and dt between to_char(add_months(sysdate, -6), 'YYYY-mm') || '-01' and sysdate
 	</select>
 
 </mapper>

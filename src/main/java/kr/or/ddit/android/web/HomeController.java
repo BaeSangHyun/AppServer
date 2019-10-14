@@ -37,8 +37,7 @@ public class HomeController {
 
         Employee user = userService.checkUser(new Employee(userId, pass));
 
-        if (user == null) {
-        } else {
+        if (user != null) {
             model.addAttribute("user", user);
         }
 
@@ -51,9 +50,7 @@ public class HomeController {
     }
 
     @RequestMapping(path = "checkCommute", method = RequestMethod.POST)
-    public String checkCommute(HttpServletRequest request, Model model) throws ParseException {
-        Commute commute = new Commute();
-        commute.setEmp_id(request.getParameter("emp_id"));
+    public String checkCommute(Commute commute, Model model) throws ParseException {
 
         Date nowDt = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
@@ -98,17 +95,31 @@ public class HomeController {
     }
 
     @RequestMapping(path = "commuteList", method = RequestMethod.POST)
-    public String commuteList(HttpServletRequest request, Model model) {
-        String emp_id = request.getParameter("emp_id");
+    public String commuteList(Commute commute, Model model) {
 
-        Commute commute = new Commute();
-        commute.setEmp_id(emp_id);
-
-        if ( emp_id != null ) {
+        if ( commute.getEmp_id() != null ) {
             List<Commute> commuteList = commuteService.getCommuteList(commute);
             model.addAttribute("commuteList", commuteList);
         }
 
+        return "jsonView";
+    }
+
+    @RequestMapping(path = "setReas", method = RequestMethod.POST)
+    public String setReas(Commute commute, Model model) {
+        if (commute != null) {
+            int result = commuteService.commuteReason(commute);
+            model.addAttribute("result", result);
+        }
+        return "jsonView";
+    }
+
+    @RequestMapping(path = "commuteInfo", method = RequestMethod.POST)
+    public String commuteInfo(Commute commute, Model model) {
+        if ( commute != null ) {
+            commute = commuteService.commuteInfo(commute);
+            model.addAttribute("commute", commute);
+        }
         return "jsonView";
     }
 
