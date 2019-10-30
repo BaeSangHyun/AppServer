@@ -14,6 +14,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
+import java.util.TimeZone;
+
 @Configuration
 @PropertySource(value = "classpath:kr/or/ddit/config/mybatis/db.properties")
 @ImportResource("classpath:kr/or/ddit/config/spring/context-transaction.xml")
@@ -24,11 +26,14 @@ public class DatasourceConfig {
 	
 	@Bean
 	public DataSource datasource() {
+		TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
+		TimeZone.setDefault(timeZone);
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
 		dataSource.setUrl(env.getProperty("jdbc.url"));
 		dataSource.setUsername(env.getProperty("jdbc.user"));
 		dataSource.setPassword(env.getProperty("jdbc.pass"));
+
 		return dataSource;
 	}
 	

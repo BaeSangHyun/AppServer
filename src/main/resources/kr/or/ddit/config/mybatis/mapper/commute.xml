@@ -36,7 +36,7 @@
 		select *
 		from commute
 		where emp_id = #{emp_id}
-		and dt between to_char(add_months(sysdate, -6), 'YYYY-mm') || '-01' and sysdate
+		and dt between to_date(to_char(add_months(sysdate, -6), 'YYYY-mm') || '-01', 'yyyy-mm-dd') and to_date(sysdate, 'yyyy-mm-dd')
 	</select>
 
 </mapper>

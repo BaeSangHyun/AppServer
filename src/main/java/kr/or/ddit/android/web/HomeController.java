@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -50,9 +52,13 @@ public class HomeController {
     }
 
     @RequestMapping(path = "checkCommute", method = RequestMethod.POST)
-    public String checkCommute(Commute commute, Model model) throws ParseException {
+    public String checkCommute(Commute commute, Data nowDt, Model model) throws ParseException {
 
-        Date nowDt = new Date();
+//        SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+//        Date nowDt = sf.parse(now_Dt);
+//        sf = new SimpleDateFormat("YYYY-MM-dd");
+//        commute.setDt(sf.format(nowDt));
+
         SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
         commute.setDt(sf.format(nowDt));
 
@@ -120,6 +126,12 @@ public class HomeController {
             commute = commuteService.commuteInfo(commute);
             model.addAttribute("commute", commute);
         }
+        return "jsonView";
+    }
+
+    @GetMapping(path = "test")
+    public String test(String test, Model model) {
+        model.addAttribute("test", test);
         return "jsonView";
     }
 
